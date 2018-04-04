@@ -92,16 +92,6 @@ etc/firmware/a300_pm4.fw
 etc/firmware/a420_pfp.fw
 etc/firmware/a420_pm4.fw
 
-# Media
-lib/libOmxVdecHevc.so
--vendor/lib/libHevcSwDecoder.so
-vendor/lib/libI420colorconvert.so
-vendor/lib/libmmosal.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libOmxAacDec.so
-vendor/lib/libOmxEvrcDec.so
-vendor/lib/libOmxQcelp13Dec.so
-
 # IMS
 -framework/imscmlibrary.jar
 -vendor/app/ims/ims.apk|66fa3ab695d7be55a334cbee6e9c94d60089ac2a
@@ -222,3 +212,4 @@ etc/firmware/venus.b03
 etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
+
