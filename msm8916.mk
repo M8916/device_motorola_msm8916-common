@@ -216,7 +216,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     libqsap_shim \
-    libril-wrapper \
     librmnetctl \
     libxml2
 
