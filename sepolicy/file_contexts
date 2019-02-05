@@ -8,6 +8,7 @@
 /system/bin/rmt_storage                                     u:object_r:rmt_storage_exec:s0
 /system/bin/time_daemon                                     u:object_r:time_daemon_exec:s0
 
+/(vendor|system/vendor)/bin/qmi_motext_hook                 u:object_r:rild_exec:s0
 /(vendor|system/vendor)/bin/akmd09912                       u:object_r:akmd09912_exec:s0
 /(vendor|system/vendor)/bin/init\.device\.config\.sh        u:object_r:device_config_exec:s0
 /(vendor|system/vendor)/bin/init\.mmi\.boot\.sh             u:object_r:mmi_boot_sh_exec:s0
