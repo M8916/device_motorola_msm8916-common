@@ -322,37 +322,37 @@ on post-fs-data
     setprop ro.hw.radio ${ro.boot.radio}
 
 # Start Sensor daemon
-service stml0xx /vendor/bin/stml0xx_wrapper.sh
+service stml0xx /system/vendor/bin/stml0xx_wrapper.sh
     class late_start
     user compass
     group compass misc input
     oneshot
 
-service mmi-boot-sh /vendor/bin/init.mmi.boot.sh
+service mmi-boot-sh /system/vendor/bin/init.mmi.boot.sh
     class core
     user root
     group root radio
     oneshot
 
-service mmi-bt-sh /vendor/bin/init.mmi.bt.sh
+service mmi-bt-sh /system/vendor/bin/init.mmi.bt.sh
     class main
     user root
     group root system
     oneshot
 
-service mmi-touch-sh /vendor/bin/init.mmi.touch.sh synaptics
+service mmi-touch-sh /system/vendor/bin/init.mmi.touch.sh synaptics
     class core
     user root
     group root system oem_5004
     oneshot
 
-service wcnss-service /vendor/bin/wcnss_service
+service wcnss-service /system/vendor/bin/wcnss_service
     class main
     user system
     group system wifi radio
 
 #start camera server as daemon
-service qcamerasvr /system/bin/mm-qcamera-daemon
+service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
@@ -369,7 +369,7 @@ on property:persist.usb.chgdisabled=1
 on property:persist.usb.chgdisabled=0
     write /sys/class/power_supply/battery/charging_enabled 1
 
-service qseecomd /system/bin/qseecomd
+service qseecomd /system/vendor/bin/qseecomd
    class core
    user root
    group root
@@ -387,17 +387,17 @@ service thermal-com /system/vendor/bin/thermal-engine --minimode
     user root
     disabled
 
-service time_daemon /system/bin/time_daemon
+service time_daemon /system/vendor/bin/time_daemon
    class late_start
    user root
    group root
 
-service irsc_util /system/bin/irsc_util "/vendor/etc/sec_config"
+service irsc_util /system/vendor/bin/irsc_util "/system/vendor/etc/sec_config"
     class main
     user root
     oneshot
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
@@ -414,17 +414,17 @@ on property:hw.fm.init=1
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 1
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
+service qmuxd /system/vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps nfc oem_2950
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /system/vendor/bin/netmgrd
     class main
     user root
     group root wifi wakelock radio inet oem_2950
 
-service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
+service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -d \
     -I/vendor/etc/wifi/wpa_supplicant_overlay.conf \
@@ -438,7 +438,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service ril-daemon2 /vendor/bin/hw/rild -c 2
+service ril-daemon2 /system/vendor/bin/hw/rild -c 2
     class main
     user radio
     disabled
@@ -452,7 +452,7 @@ on property:persist.radio.multisim.config=dsda
     enable ril-daemon2
 
 on copy_qcril_db
-    copy /vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril.db
+    copy /system/vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril.db
     chown radio radio /data/vendor/radio/qcril.db
     write /data/vendor/radio/db_check_done 1
 
@@ -480,7 +480,7 @@ service vendor.imsdatadaemon /system/vendor/bin/imsdatadaemon
 on property:vendor.ims.QMI_DAEMON_STATUS=1
     start vendor.imsdatadaemon
 
-service vendor.ims_rtp_daemon /vendor/bin/ims_rtp_daemon
+service vendor.ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
     class main
     user system
     socket ims_rtpd stream 0660 system radio
@@ -502,24 +502,11 @@ service vendor.per_mgr /system/vendor/bin/pm-service
     group system
     writepid /dev/cpuset/system-background/tasks
 
-service vendor.per_proxy /system/vendor/bin/pm-proxy
-    class core
-    user system
-    group system
-    disabled
-    writepid /dev/cpuset/system-background/tasks
-
 on property:init.svc.per_mgr=running
     start per_proxy
 
 on property:sys.shutdown.requested=*
     stop per_proxy
-
-service ppd /vendor/bin/mm-pp-daemon
-    class hal
-    user system
-    socket pps stream 0660 system system
-    group system graphics
 
 on moto-charger
     setprop ro.board.platform msm8916
@@ -547,4 +534,4 @@ on moto-charger
 
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
-    swapon_all /vendor/etc/fstab.qcom
+    swapon_all /system/vendor/etc/fstab.qcom
